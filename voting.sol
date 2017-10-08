@@ -2,6 +2,46 @@ pragma solidity ^0.4.11;
 // We have to specify what version of compiler this code will compile with
 
 // import "./authentication.sol";
+
+
+contract Authentication {
+  /* mapping field below is equivalent to an associative array or hash.
+  The key of the mapping is candidate name stored as type bytes32 and value is
+  an unsigned integer to store the vote count
+  */
+  
+
+  function Authentication(bytes32[] myList,bytes32[] constituencies) {
+  }
+
+  function isVoterExist(bytes32 voter) returns (bool) {
+  }
+
+  function isVoteAvailable(bytes32 voter) returns (bool)  {
+  }
+
+  function getVoterConstituency(bytes32 voter)returns (string) {
+  }
+
+  // This function returns the total votes a candidate has received so far
+  function isAuthentic(bytes32 voter) returns (bool) {
+  }
+
+  // This function increments the vote count for the specified candidate. This
+  // is equivalent to casting a vote
+
+  function validVoter(bytes32 voter) returns (bool) {
+  }
+
+  function bytes32ToString(bytes32 x) constant returns (string) {
+  }
+
+}
+
+
+
+
+
 contract Voting {
   /* mapping field below is equivalent to an associative array or hash.
   The key of the mapping is candidate name stored as type bytes32 and value is
@@ -9,6 +49,8 @@ contract Voting {
   */
   
   mapping (bytes32 => uint8) public votesReceived;
+
+  Authentication authObj = Authentication("0xdac8aca0bb732d6513191c965f35481fc4e7502f")
 
   
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
