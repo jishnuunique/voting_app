@@ -1,12 +1,14 @@
 //web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); 
 web3 = new Web3(new Web3.providers.HttpProvider("http://10.1.24.48:8545"));
 
-abiVotingContract = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"constituencyDict","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"getCandidateConstituency","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"x","type":"bytes32"}],"name":"bytes32ToString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"},{"name":"constituencies","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
+addressVoting = '0x829f074294d6fac9a744d6c352088e5b5652935c';
+interfaceVoting = '[{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"constituencyDict","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"},{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"getCandidateConstituency","outputs":[{"name":"","type":"bool"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"x","type":"bytes32"}],"name":"bytes32ToString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"test","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"},{"name":"constituencies","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]';
+abiVotingContract = JSON.parse(interfaceVoting);
 VotingContract = web3.eth.contract(abiVotingContract);
-votingContractInstance = VotingContract.at('0x49983178346b0f3a2166ed8e55d153b9180cd6da'); //deep
+votingContractInstance = VotingContract.at(addressVoting); //deep
 
-addressAuthentication = '0xdac8aca0bb732d6513191c965f35481fc4e7502f';
-interfaceAuthentiation = '[{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"isAuthentic","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"getVoterConstituency","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"constituencyDict","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"validVoter","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"isVoteAvailable","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"voterList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesAvailable","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"x","type":"bytes32"}],"name":"bytes32ToString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"isVoterExist","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"myList","type":"bytes32[]"},{"name":"constituencies","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]';
+addressAuthentication = '0xf42919e05e874567a1c3f32a05cd3d030b5df25d';
+interfaceAuthentiation = '[{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"},{"name":"voter","type":"bytes32"}],"name":"checkConstituency","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"constituencyDict","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"isVoteAvailable","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"voterList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"},{"name":"voter","type":"bytes32"}],"name":"validVoter","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"ping","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesAvailable","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"x","type":"bytes32"}],"name":"bytes32ToString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"},{"name":"voter","type":"bytes32"}],"name":"isAuthentic","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"voter","type":"bytes32"}],"name":"isVoterExist","outputs":[{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"voting","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"myList","type":"bytes32[]"},{"name":"constituencies","type":"bytes32[]"},{"name":"addr","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]';
 abiAuthenticationContract = JSON.parse(interfaceAuthentiation);
 AuthenticationContract = web3.eth.contract(abiAuthenticationContract);
 authenticationContractInstance = AuthenticationContract.at(addressAuthentication); //deep
@@ -24,69 +26,21 @@ function voteForCandidate() {
   voterName = $("#voter").val();
   console.log('voterName:' + voterName);
 
-  constituencyName = $("#constituency").val();
-  console.log('constituencyName:' + constituencyName);
+  isAuthenticResponse = isAuthenticVoter(candidateName, voterName);
+  console.log("isAuthentic:" + isAuthenticResponse);
 
-  isCandidate = votingContractInstance.validCandidate.call(candidateName).toString();
-  console.log('isCandidate:' + isCandidate);
-  if(isCandidate=="false")
+  if(isAuthenticResponse[0] == false)
   {
-    alert("invalid candidateName");
-    return;
-  }
-
-  authenticationContractInstance.isVoterExist(voterName, {from: web3.eth.accounts[0]}, function() {  });
-  isVoter = authenticationContractInstance.isVoterExist.call(voterName).toString();
-  console.log('isVoter:' + isVoter);
-  if(isVoter=="false")
-  {
-    alert("invalid voterName");
-    return;
-  }
-
-  isVoteAvailable = authenticationContractInstance.isVoteAvailable.call(voterName).toString();
-  console.log('isVoteAvailable:' + isVoteAvailable);
-  if(isVoteAvailable=="false")
-  {
-    alert("no vote available");
-    return;
-  }
-
-  candidateConstituency = votingContractInstance.getCandidateConstituency.call(candidateName).toString();
-  console.log('candidateConstituency:' + candidateConstituency);
-  isEqualsCandidateConstituency = ( candidateConstituency == constituencyName);
-  console.log('isEqualsCandidateConstituency:' + isEqualsCandidateConstituency);
-  if(isEqualsCandidateConstituency==false)
-  {
-    alert("different candidate constituency");
-    return;
-  }
-
-  voterConstituency = authenticationContractInstance.getVoterConstituency.call(voterName).toString();
-  console.log('voterConstituency:' + voterConstituency);
-  isEqualsVoterConstituency = ( voterConstituency == constituencyName);
-  console.log('isEqualsVoterConstituency:' + isEqualsVoterConstituency);
-  if(isEqualsVoterConstituency==false)
-  {
-    alert("different voter constituency");
-    return;
-  }
-
-  isAuthenticBool = isAuthenticVoter(voterName);
-  console.log("isAuthentic:"+isAuthenticBool);
-
-  if(isAuthenticBool == "false")
-  {
-    console.log("bhak saale");
-    alert("bhak saale");
+    console.log(isAuthenticResponse[1]);
+    alert(isAuthenticResponse[1]);
     return;
   }
 
 
   votingContractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]}, function() {
     let div_id = candidates[candidateName];
-    $("#" + div_id).html(votingContractInstance.totalVotesFor.call(candidateName).toString());
-    alert("voter done");
+    $("#" + div_id).html(votingContractInstance.totalVotesFor.call(candidateName)[0].toString());
+    alert("voting done");
   });
 }
 
@@ -94,18 +48,14 @@ $(document).ready(function() {
   candidateNames = Object.keys(candidates);
   for (var i = 0; i < candidateNames.length; i++) {
     let name = candidateNames[i];
-    let val = votingContractInstance.totalVotesFor.call(name).toString()
+    let val = votingContractInstance.totalVotesFor.call(name)[0].toString();
     $("#" + candidates[name]).html(val);
   }
 });
 
-function isAuthenticVoter(voterName)
+function isAuthenticVoter(candidateName, voterName)
 {
-  // if(voterName=='true')
-    // return true;
-  // if (voterName=='false')
-    // return false;
-  authenticationContractInstance.isAuthentic(voterName, {from: web3.eth.accounts[1]}, function(){});
-  isAuthenticBool = authenticationContractInstance.isAuthentic.call(voterName);
-  return isAuthenticBool;
+  isAuthenticResponse = authenticationContractInstance.isAuthentic.call(candidateName, voterName);
+  authenticationContractInstance.isAuthentic(candidateName, voterName, {from: web3.eth.accounts[0]}, function(){});
+  return isAuthenticResponse;
 }
