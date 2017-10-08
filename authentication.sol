@@ -1,6 +1,7 @@
 pragma solidity ^0.4.11;
 // We have to specify what version of compiler this code will compile with
 
+
 contract Authentication {
   /* mapping field below is equivalent to an associative array or hash.
   The key of the mapping is candidate name stored as type bytes32 and value is
@@ -60,6 +61,10 @@ contract Authentication {
       return true;
     }
     return false;
+  }
+
+  function ping()returns (bool){
+    return true;
   }
 
   // This function increments the vote count for the specified candidate. This
