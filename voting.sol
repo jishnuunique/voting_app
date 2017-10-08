@@ -27,6 +27,8 @@ contract Authentication {
   function isAuthentic(bytes32 voter) returns (bool) {
   }
 
+  function ping()returns (bool){}
+
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
 
@@ -50,7 +52,7 @@ contract Voting {
   
   mapping (bytes32 => uint8) public votesReceived;
 
-  Authentication authObj = Authentication("0xdac8aca0bb732d6513191c965f35481fc4e7502f")
+  Authentication public authObj ;
 
   
   /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
@@ -59,18 +61,19 @@ contract Voting {
   
   bytes32[] public candidateList;
   mapping (bytes32 => bytes32) public constituencyDict;
-
+  address public addr;
 
 
   /* This is the constructor which will be called once when you
   deploy the contract to the blockchain. When we deploy the contract,
   we will pass an array of candidates who will be contesting in the election
   */
-  function Voting(bytes32[] candidateNames, bytes32[] constituencies) {
+  function Voting(bytes32[] candidateNames, bytes32[] constituencies, address add) {
     candidateList = candidateNames;
     for(uint i = 0; i < candidateNames.length; i++) {
       constituencyDict[candidateNames[i]] = constituencies[i];
     }
+    addr = add;
   }
 
   // This function returns the total votes a candidate has received so far
@@ -90,6 +93,11 @@ contract Voting {
     if (validCandidate(candidate) == false)
       throw;
     return bytes32ToString(constituencyDict[candidate]);
+  }
+
+  function test ()returns (bool,string){
+    authObj = Authentication(addr);
+    return (authObj.ping(),"hi");
   }
 
   function validCandidate(bytes32 candidate) returns (bool) {
